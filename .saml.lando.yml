@@ -1,0 +1,11 @@
+# TODO: Everything
+# https://docs.platform.sh/frameworks/drupal7/simplesaml.html
+# https://community.rsa.com/community/products/securid/blog/2016/05/19/need-a-demo-saml-service-provider-we-got-you-covered
+appserver:
+  locations:
+    '/simplesaml':
+      root: 'public/sites/default/simplesamlphp/www'
+      allow: true
+      scripts: true
+      index:
+        - index.php
