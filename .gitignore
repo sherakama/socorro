@@ -47,3 +47,14 @@
 ehthumbs.db
 Thumbs.db
 desktop.ini
+
+# Running files. #
+#######################
+.lando.yml
+composer.lock
+composer.local.json
+
+# Package Managers #
+####################
+vendor
+node_modules

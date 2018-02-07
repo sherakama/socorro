@@ -1,0 +1,109 @@
+{
+  "name": "sherakama/socorro",
+  "description": "Socorro",
+  "keywords": [ "drupal", "testing", "deployment", "automation", "template", "lando" ],
+  "authors": [
+    {
+      "name": "Shea McKinney"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/sherakama/socorro/issues",
+    "docs": "https://github.com/sherakama/socorro/wiki"
+  },
+  "type": "project",
+  "license": "GPL-2.0-only",
+  "repositories": [],
+  "require": {
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6",
+    "davidbarratt/custom-installer": "~1.0",
+    "drupal-composer/drupal-scaffold": "^2.2",
+  },
+  "require-dev": {
+    "behat/mink": "^1.7",
+    "behat/mink-goutte-driver": "^1.2",
+    "drush/drush": "~8.1.0",
+    "drush/config-extra": "^1.0.1",
+    "drupal/console": "~1.0",
+    "drupal/composer_deploy": "~1.1",
+    "jcalderonzumba/gastonjs": "^1.1",
+    "jcalderonzumba/mink-phantomjs-driver": "~0.3.3",
+    "mikey179/vfsStream": "^1.6",
+    "phpunit/phpunit": "^4.8",
+    "symfony/css-selector": "~2.8"
+  },
+  "scripts": {
+    "drupal-scaffold": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+    ]
+  },
+  "extra": {
+    "installer-paths": {
+      "docroot/core": [
+        "type:drupal-core"
+      ],
+      "docroot/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "docroot/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "docroot/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/contrib/{$name}": [
+        "type:drupal-drush"
+      ],
+      "docroot/libraries/{$name}/": [
+        "type:drupal-library",
+        "type:component",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
+      "docroot/modules/custom/{$name}": [
+        "type:drupal-custom-module"
+      ],
+      "docroot/themes/custom/{$name}": [
+        "type:drupal-custom-theme"
+      ],
+      "docroot/profiles/custom/{$name}": [
+        "type:drupal-custom-profile"
+      ]
+    },
+    "custom-installer": {
+      "docroot/libraries/{$name}/": [
+        "type:component",
+        "ckeditor/ckeditor",
+        "enyo/dropzone",
+        "components/jquery"
+      ],
+      "vendor/{$vendor}/{$name}/": [
+        "type:library"
+      ]
+    },
+    "merge-plugin": {
+      "require": [
+        "composer.required.json"
+      ],
+      "include": [
+        "composer.local.json"
+      ],
+      "merge-extra": true,
+      "merge-extra-deep": true,
+      "merge-scripts": true,
+      "replace": false,
+      "ignore-duplicates": true
+    },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ]
+  },
+  "config": {
+    "bin-dir": "vendor/bin/",
+    "preferred-install": "dist",
+    "component-dir": "docroot/libraries",
+    "component-baseurl": "/libraries"
+  }
+}

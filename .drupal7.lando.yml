@@ -1,7 +1,7 @@
 name: drupal7
 recipe: drupal7
 config:
-  webroot: /
+  webroot: docroot
   xdebug: false
   php: '7.1'
 services:
