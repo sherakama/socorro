@@ -1,3 +1,11 @@
 {
-  
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ]
+  "require": {
+    "acquia/lightning": "^3.0.1"
+  }
 }
