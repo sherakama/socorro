@@ -18,7 +18,20 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "repositories": [],
+  "repositories": {
+    "0": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    "1": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    },
+    "dev": {
+      "type": "vcs",
+      "url": "https://github.com/acquia/lightning-dev"
+    }
+  },
   "require": {
     "composer/installers": "^1.2",
     "cweagans/composer-patches": "^1.6",
