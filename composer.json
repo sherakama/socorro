@@ -1,117 +1,89 @@
 {
-  "name": "sherakama/socorro",
-  "description": "Socorro",
-  "keywords": [ "drupal", "testing", "deployment", "automation", "template", "lando" ],
+  "name": "drupal-composer/drupal-project",
+  "description": "Project template for Drupal 7 projects with composer",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
-      "name": "Shea McKinney"
+      "name": "",
+      "role": ""
     }
   ],
-  "support": {
-    "issues": "https://github.com/sherakama/socorro/issues",
-    "docs": "https://github.com/sherakama/socorro/wiki"
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/7"
+    }
+  ],
+  "require": {
+    "php": ">=5.2.5",
+    "ext-gd": "*",
+    "ext-xml": "*",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-curl": "*",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*",
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6",
+    "drupal-composer/preserve-paths": "^0.1",
+    "drupal/drupal": "~7.0",
+    "drupal/composer_autoloader": "^1.0",
+    "drush/drush": "~8.0",
+    "webflo/drupal-finder": "^1.0.0",
+    "webmozart/path-util": "^2.3"
   },
-  "type": "project",
-  "license": "GPL-2.0-only",
   "conflict": {
-    "drupal/drupal": "*"
+    "drupal/core": "8.*"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "repositories": {
-    "0": {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-    },
-    "1": {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    },
-    "dev": {
-      "type": "vcs",
-      "url": "https://github.com/acquia/lightning-dev"
-    }
+  "config": {
+    "sort-packages": true
   },
-  "require": {
-    "composer/installers": "^1.2",
-    "cweagans/composer-patches": "^1.6",
-    "davidbarratt/custom-installer": "~1.0",
-    "drupal-composer/drupal-scaffold": "^2.2"
-  },
-  "require-dev": {
-    "acquia/blt": "~9.0.0"
+  "autoload": {
+    "classmap": [
+      "scripts/composer/ScriptHandler.php"
+    ]
   },
   "scripts": {
-    "drupal-scaffold": [
-      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+    "pre-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "pre-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "post-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "post-create-project-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::removeInternalFiles"
     ]
   },
   "extra": {
+    "patches": {
+      "cweagans/composer-patches": {
+        "Call the preserve paths hooks" : "https://github.com/SebCorbin/composer-patches/commit/1cb9bacba51f8bba0c5f3f322c3bb61e4ceae974.patch"
+      }
+    },
     "installer-paths": {
-      "docroot/core": [
-        "type:drupal-core"
-      ],
-      "docroot/modules/contrib/{$name}": [
-        "type:drupal-module"
-      ],
-      "docroot/profiles/contrib/{$name}": [
-        "type:drupal-profile"
-      ],
-      "docroot/themes/contrib/{$name}": [
-        "type:drupal-theme"
-      ],
-      "drush/contrib/{$name}": [
-        "type:drupal-drush"
-      ],
-      "docroot/libraries/{$name}/": [
-        "type:drupal-library",
-        "type:component",
-        "type:bower-asset",
-        "type:npm-asset"
-      ],
-      "docroot/modules/custom/{$name}": [
-        "type:drupal-custom-module"
-      ],
-      "docroot/themes/custom/{$name}": [
-        "type:drupal-custom-theme"
-      ],
-      "docroot/profiles/custom/{$name}": [
-        "type:drupal-custom-profile"
-      ]
+      "docroot/": ["type:drupal-core"],
+      "docroot/profiles/{$name}/": ["type:drupal-profile"],
+      "docroot/sites/all/drush/{$name}/": ["type:drupal-drush"],
+      "docroot/sites/all/libraries/{$name}/": ["type:drupal-library"],
+      "docroot/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
+      "docroot/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"]
     },
-    "custom-installer": {
-      "docroot/libraries/{$name}/": [
-        "type:component",
-        "ckeditor/ckeditor",
-        "enyo/dropzone",
-        "components/jquery"
-      ],
-      "vendor/{$vendor}/{$name}/": [
-        "type:library"
-      ]
-    },
-    "merge-plugin": {
-      "require": [
-        "composer.required.json"
-      ],
-      "include": [
-        "composer.local.json"
-      ],
-      "merge-extra": true,
-      "merge-extra-deep": true,
-      "merge-scripts": true,
-      "replace": false,
-      "ignore-duplicates": true
-    },
-    "installer-types": [
-      "bower-asset",
-      "npm-asset"
+    "preserve-paths": [
+      "docroot/sites/all/libraries",
+      "docroot/sites/all/modules/custom",
+      "docroot/sites/all/modules/features",
+      "docroot/sites/all/themes/custom",
+      "docroot/sites/all/translations",
+      "docroot/sites/default"
     ]
-  },
-  "config": {
-    "bin-dir": "vendor/bin/",
-    "preferred-install": "dist",
-    "component-dir": "docroot/libraries",
-    "component-baseurl": "/libraries"
   }
 }

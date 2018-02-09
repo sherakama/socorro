@@ -1,6 +1,5 @@
 {
   "require": {
-    "drupal/core": "^8.4.0",
-    "acquia/lightning": "^3.0.1"
+    "drupal/drupal": "~7.56",
   }
 }
